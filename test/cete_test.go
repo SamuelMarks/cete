@@ -32,7 +32,7 @@ func TestBasic(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -80,6 +80,6 @@ func TestBasic(t *testing.T) {
 
 	db.Close()
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 }

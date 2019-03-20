@@ -57,7 +57,7 @@ func TestPostIndex(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -184,7 +184,7 @@ func TestPreIndex(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -310,7 +310,7 @@ func TestIndexDrop(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -463,7 +463,7 @@ func testIndexBetween(t *testing.T, compression bool) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -675,7 +675,7 @@ func TestIndexSet(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -1079,7 +1079,7 @@ func TestIndexLoading(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -1107,7 +1107,7 @@ func TestIndexLoading(t *testing.T) {
 
 	db.Close()
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	if db.Tables()[0] != "index_testing" {
@@ -1135,7 +1135,7 @@ func TestIndexLoading(t *testing.T) {
 
 	db.Close()
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	if db.Tables()[0] != "index_testing" {
@@ -1184,7 +1184,7 @@ func TestIndexDelete(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -1242,7 +1242,7 @@ func TestSmallIndex(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -1280,7 +1280,7 @@ func TestIndexAll(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()

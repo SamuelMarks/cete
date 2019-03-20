@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/1lann/badger"
 	"github.com/1lann/msgpack"
+	"github.com/dgraph-io/badger"
 )
 
 // Common errors that can be returned
@@ -66,10 +66,7 @@ type DB struct {
 func exists(path string) (bool, error) {
 	stat, err := os.Stat(path)
 	if err == nil {
-		if !stat.IsDir() {
-			return false, nil
-		}
-		return true, nil
+		return stat.IsDir(), nil
 	}
 	if os.IsNotExist(err) {
 		return false, nil

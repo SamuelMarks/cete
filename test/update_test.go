@@ -27,7 +27,7 @@ func TestConsistency(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	err = db.NewTable("table_update")
@@ -86,7 +86,7 @@ func TestUpdateErrors(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	err = db.NewTable("table_update")

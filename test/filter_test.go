@@ -48,7 +48,7 @@ func TestDo(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -154,7 +154,7 @@ func TestFilter(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {

@@ -58,7 +58,7 @@ func TestTableBetween(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	err = db.NewTable("table_testing")
@@ -317,7 +317,7 @@ func TestTableLoading(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -338,7 +338,7 @@ func TestTableLoading(t *testing.T) {
 
 	db.Close()
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	if db.Tables()[0] != "table_testing" {
@@ -370,7 +370,7 @@ func TestTableLoading(t *testing.T) {
 
 	db.Close()
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	if len(db.Tables()) != 0 {
@@ -415,7 +415,7 @@ func TestTableCounter(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -491,7 +491,7 @@ func TestTableNaming(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {
@@ -550,7 +550,7 @@ func TestInvalidTypes(t *testing.T) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer func() {

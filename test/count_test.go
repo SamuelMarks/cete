@@ -4,6 +4,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
+	"path"
 	"strconv"
 	"strings"
 	"testing"
@@ -36,7 +37,7 @@ func testCounting(t *testing.T, compression bool) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()

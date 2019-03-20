@@ -1,0 +1,8 @@
+package: github.com/SamuelMarks/cete
+import:
+- package: github.com/1lann/msgpack
+  version: ^3.0.1
+- package: github.com/dgraph-io/badger
+  version: ^2.0.0-rc1
+  subpackages:
+  - options

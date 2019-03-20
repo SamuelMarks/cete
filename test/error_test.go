@@ -3,6 +3,7 @@ package cete
 import (
 	"io/ioutil"
 	"os"
+	"path"
 	"testing"
 )
 
@@ -10,7 +11,7 @@ func populateDB(people map[string]Person) (*DB, string) {
 	dir, err := ioutil.TempDir("", "cete_")
 	panicNotNil(err)
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	db.NewTable("error_testing")
@@ -90,15 +91,15 @@ func TestBadFiles(t *testing.T) {
 	dir, err := ioutil.TempDir("", "cete_")
 	panicNotNil(err)
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	panicNotNil(db.NewTable("error_testing"))
 	db.Close()
 
-	panicNotNil(os.Remove(dir + "/data/config.dat"))
+	panicNotNil(os.Remove(path.Join(dir, "data", "config.data")))
 
-	_, err = Open(dir + "/data")
+	_, err = Open(path.Join(dir, "data"))
 	if err == nil {
 		t.Fatal("error should not be nil, but is")
 	}
@@ -108,7 +109,7 @@ func TestBadFiles(t *testing.T) {
 	dir, err = ioutil.TempDir("", "cete_")
 	panicNotNil(err)
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 	panicNotNil(db.NewTable("error_testing"))
 	panicNotNil(db.Table("error_testing").NewIndex("test"))
@@ -116,59 +117,59 @@ func TestBadFiles(t *testing.T) {
 
 	t.Log("using:", dir)
 
-	panicNotNil(os.Chmod(dir+"/data/6572726f725f74657374696e67/74657374", 0000))
+	panicNotNil(os.Chmod(path.Join(dir, "data", "6572726f725f74657374696e67", "74657374"), 0000))
 
-	_, err = Open(dir + "/data")
+	_, err = Open(path.Join(dir, "data"))
 	if err == nil {
 		t.Fatal("error should not be nil, but is")
 	}
 
-	panicNotNil(os.Chmod(dir+"/data/6572726f725f74657374696e67/74657374", 0777))
+	panicNotNil(os.Chmod(path.Join(dir, "data", "6572726f725f74657374696e67", "74657374"), 0777))
 
-	panicNotNil(os.Chmod(dir+"/data/6572726f725f74657374696e67", 0000))
+	panicNotNil(os.Chmod(path.Join(dir, "data", "6572726f725f74657374696e67"), 0000))
 
-	_, err = Open(dir + "/data")
+	_, err = Open(path.Join(dir, "data"))
 	if err == nil {
 		t.Fatal("error should not be nil, but is")
 	}
 
-	panicNotNil(os.Chmod(dir+"/data/6572726f725f74657374696e67", 0777))
+	panicNotNil(os.Chmod(path.Join(dir, "data", "6572726f725f74657374696e67"), 0777))
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	db.Close()
 
-	panicNotNil(os.Rename(dir+"/data/6572726f725f74657374696e67/data",
-		dir+"/data/6572726f725f74657374696e67/old"))
-	file, err = os.Create(dir + "/data/6572726f725f74657374696e67/data")
+	panicNotNil(os.Rename(path.Join(dir, "data", "6572726f725f74657374696e67", "data"),
+		path.Join(dir, "data", "6572726f725f74657374696e67", "old")))
+	file, err = os.Create(path.Join(dir, "data", "6572726f725f74657374696e67", "data"))
 	panicNotNil(err)
 
 	file.Write([]byte("junk"))
 	file.Close()
 
-	_, err = Open(dir + "/data")
+	_, err = Open(path.Join(dir, "data"))
 	if err == nil {
 		t.Fatal("error should not be nil, but is")
 	}
 
-	panicNotNil(os.Remove(dir + "/data/6572726f725f74657374696e67/data"))
-	panicNotNil(os.Rename(dir+"/data/6572726f725f74657374696e67/old",
-		dir+"/data/6572726f725f74657374696e67/data"))
+	panicNotNil(os.Remove(path.Join(dir, "data", "6572726f725f74657374696e67", "data")))
+	panicNotNil(os.Rename(path.Join(dir, "data", "6572726f725f74657374696e67", "old"),
+		path.Join(dir, "data", "6572726f725f74657374696e67", "data")))
 
-	panicNotNil(os.RemoveAll(dir + "/data"))
+	panicNotNil(os.RemoveAll(path.Join(dir, "data")))
 
-	db, err = Open(dir + "/data")
+	db, err = Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	db.Close()
 
-	file, err = os.Create(dir + "/data/config.dat")
+	file, err = os.Create(path.Join(dir, "data", "config.dat"))
 	panicNotNil(err)
 	file.Write([]byte{0x87})
 	file.Close()
 
-	_, err = Open(dir + "/data")
+	_, err = Open(path.Join(dir, "data"))
 	if err == nil {
 		t.Fatal("error should not be nil, but is")
 	}

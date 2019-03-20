@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"github.com/1lann/badger"
 	"github.com/1lann/msgpack"
+	"github.com/dgraph-io/badger"
 )
 
 // Bounds is the type for variables which represent a bound for Between.
@@ -16,7 +16,7 @@ type Bounds int
 
 // Minimum and maximum values.
 var (
-	MinValue Bounds = (-1 << 63)
+	MinValue Bounds = -1 << 63
 	MaxValue Bounds = (1 << 63) - 1
 )
 
@@ -90,7 +90,7 @@ func (t *Table) NewIndex(name string) error {
 func (i *Index) indexValues(name string) error {
 	var total int64
 
-	i.table.Between(MinValue, MaxValue).Do(func(key string, counter uint64, doc Document) error {
+	if err := i.table.Between(MinValue, MaxValue).Do(func(key string, counter uint64, doc Document) error {
 		last := atomic.AddInt64(&total, 1)
 		if last%100000 == 0 {
 			log.Println(last)
@@ -104,12 +104,14 @@ func (i *Index) indexValues(name string) error {
 		for _, result := range results {
 			err = i.addToIndex(valueToBytes(result), key)
 			if err != nil {
-				log.Println("cete: index error for index \""+name+"\":", err)
+				log.Printf("cete: index error for index \""+name+"\":", err)
 			}
 		}
 
 		return nil
-	}, 20)
+	}, 20); err != nil {
+		return err
+	}
 
 	return nil
 }

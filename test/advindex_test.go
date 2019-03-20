@@ -72,7 +72,7 @@ func testCompoundIndex(t *testing.T, compression bool) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()
@@ -172,7 +172,7 @@ func testMultiIndex(t *testing.T, compression bool) {
 		}
 	}()
 
-	db, err := Open(dir + "/data")
+	db, err := Open(path.Join(dir, "data"))
 	panicNotNil(err)
 
 	defer db.Close()

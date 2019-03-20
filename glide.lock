@@ -1,0 +1,49 @@
+hash: a53bfc1f228fecc56201c3380639cdfb99bcce69b0880b29a3057793bf0dc688
+updated: 2019-03-20T16:28:31.673025+11:00
+imports:
+- name: github.com/1lann/msgpack
+  version: 6faa7c82f753ab77ea6cbbd1dbf6ceacafe5a4ba
+- name: github.com/AndreasBriese/bbloom
+  version: 343706a395b76e5ca5c7dca46a5d937b48febc74
+- name: github.com/dgraph-io/badger
+  version: 439fd464b155d419201a5c195c70d40618376776
+  subpackages:
+  - options
+  - protos
+  - skl
+  - table
+  - "y"
+- name: github.com/dgryski/go-farm
+  version: 2de33835d10275975374b37b2dcfd22c9020a1f5
+- name: github.com/golang/protobuf
+  version: aa810b61a9c79d51363740d207bb46cf8e620ed5
+  subpackages:
+  - proto
+- name: github.com/pkg/errors
+  version: ba968bfe8b2f7e042a574c888954fccecfa385b4
+- name: github.com/vmihailenco/msgpack
+  version: e4394ca80f419abef661d3aa0d153870f56b8087
+  subpackages:
+  - codes
+- name: golang.org/x/net
+  version: c44066c5c816ec500d459a2a324a753f78531ae0
+  subpackages:
+  - context
+  - internal/timeseries
+  - trace
+- name: golang.org/x/sys
+  version: 95b1ffbd15a57cc5abb3f04402b9e8ec0016a52c
+  subpackages:
+  - unix
+- name: google.golang.org/appengine
+  version: 54a98f90d1c46b7731eb8fb305d2a321c30ef610
+  subpackages:
+  - datastore
+  - internal
+  - internal/app_identity
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/modules
+  - internal/remote_api
+testImports: []
